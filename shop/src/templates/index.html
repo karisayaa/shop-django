@@ -1,0 +1,69 @@
+{% load static %} {% static 'images' as baseUrl %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static './styles.css' %}" />
+    <title>Amazona</title>
+  </head>
+  <body>
+    <div class="grid-container">
+      <header class="header">
+        <div class="brand">
+          <button onclick="openMenu()">&#9776;</button>
+
+          <a href="#">Amazona</a>
+        </div>
+        <div class="header-link">
+          <a href="#">Sign In</a>
+          <a href="#">Cart</a>
+        </div>
+      </header>
+      <aside class="sidebar">
+        <h3 class="shophead">Shopping Categories</h3>
+        <button class="sibebar-button-close" onclick="closeMenu()">x</button>
+        <ul class="categories">
+          <li><a href="#">Pants</a></li>
+          <li><a href="#">Shirts</a></li>
+          <li><a href="#">Trousers</a></li>
+          <li><a href="#">Jeans</a></li>
+          <li><a href="#">Vests</a></li>
+        </ul>
+      </aside>
+
+      <main class="main">
+        <div class="content">
+          <ul class="products">
+            {% for product in product %}
+            <li>
+              <div class="product">
+                <img
+                  class="product-image"
+                  src="{{baseUrl}}/{{product.img}}"
+                  alt="product"
+                />
+                <div class="product-name"><a href="#">{{product.name}}</a></div>
+                <div class="product-brand">{{product.brand}}</div>
+                <div class="product-price">Ksh {{product.price}}</div>
+                <div class="product-rating">
+                  {{product.rating}} stars (10 reviews)
+                </div>
+              </div>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </main>
+      <footer class="footer">All rights &copy; Reserved</footer>
+    </div>
+    <script>
+      function openMenu() {
+        document.querySelector(".sidebar").classList.add("open");
+      }
+      function closeMenu() {
+        document.querySelector(".sidebar").classList.remove("open");
+      }
+    </script>
+  </body>
+</html>
